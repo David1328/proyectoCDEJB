@@ -1,0 +1,8 @@
+co\edu\unicundi\proyectocdejb\repository\impl\CantanteRepoImpl.class
+co\edu\unicundi\proyectocdejb\enity\Cantante.class
+co\edu\unicundi\proyectocdejb\repository\ICrud.class
+co\edu\unicundi\proyectocdejb\service\impl\CantanteServiceImpl.class
+co\edu\unicundi\proyectocdejb\NewSessionBean.class
+co\edu\unicundi\proyectocdejb\service\ICantanteService.class
+co\edu\unicundi\proyectocdejb\repository\ICantanteRepo.class
+co\edu\unicundi\proyectocdejb\enity\Cantante_.class

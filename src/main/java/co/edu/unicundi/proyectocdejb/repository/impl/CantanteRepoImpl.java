@@ -27,9 +27,10 @@ public class CantanteRepoImpl implements ICantanteRepo{
     @Override
     public List<Cantante> listar() {
         //devuelve un typeqry
-        TypedQuery<Cantante> info =  conexion.createNamedQuery("Cantante.listarTodos",Cantante.class);
+        /*TypedQuery<Cantante> info =  conexion.createNamedQuery("Cantante.listarTodos",Cantante.class);
         List<Cantante> listaCantante = info.getResultList();
-        return listaCantante;
+        return listaCantante;*/
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override

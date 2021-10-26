@@ -21,9 +21,7 @@ import javax.persistence.Table;
 
 @Table(name = "cantante",schema = "usuarios")
 
-@NamedQueries({
-    @NamedQuery(name = "Cantante.listarTodos",query = "SELECT c FROM cantante c")
-})
+
 public class Cantante implements Serializable{
     
     @Id

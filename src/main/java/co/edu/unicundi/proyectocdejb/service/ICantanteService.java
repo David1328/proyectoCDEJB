@@ -17,6 +17,7 @@ import javax.ejb.Local;
 public interface ICantanteService {
     
     public void agregar(Cantante nuevo);
+    public void elminarCantanteId(int idCantante);
     public List<Cantante> listarCantantes();
     
 }

@@ -11,7 +11,6 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 /**
@@ -28,20 +27,14 @@ public class CantanteRepoImpl implements ICantanteRepo{
     @Override
     public List<Cantante> listar() {
         //devuelve un typeqry
-        /*Query query = conexion.createQuery( "Select e " + "from cantante e");
-        List<Cantante> list=(List<Cantante>)query.getResultList( );
-        System.out.println("as"+list.get(0).getNombre());
-        return list;*/
         TypedQuery<Cantante> info =  conexion.createNamedQuery("cantante.listartodos",Cantante.class);
         List<Cantante> listaCantante = info.getResultList();
         return listaCantante;
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public Cantante listarId(Integer id) {
-        //this.conexion.createNamedQuery("Cantante.elimnar")
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.conexion.createNamedQuery("cantante.listarPorId",Cantante.class).setParameter("idCantante", id).getResultList().get(0);
     }
 
     @Override
@@ -56,7 +49,9 @@ public class CantanteRepoImpl implements ICantanteRepo{
 
     @Override
     public void eliminar(Integer eliminar) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.conexion.createNamedQuery("cantante.eliminarCantante", Cantante.class).setParameter("idCantante", eliminar)
+                .executeUpdate();
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

@@ -59,9 +59,26 @@ public class CantanteServiceImpl implements ICantanteService {
     @Override
     public void elminarCantanteId(int idCantante) {
         try {
-
+            this.repo.eliminar(idCantante);
         } catch (Exception e) {
         }
+    }
+
+    
+
+    @Override
+    public void actualizarCantane(Cantante cntnt) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Cantante listarCantantePorId(int idCantante) {
+        try {
+            return this.repo.listarId(idCantante);
+        } catch (Exception e) {
+            throw e;
+        }
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

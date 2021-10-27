@@ -7,12 +7,13 @@ package co.edu.unicundi.proyectocdejb.repository;
 
 import co.edu.unicundi.proyectocdejb.enity.Cantante;
 import java.util.List;
+import javax.ejb.Local;
 
 /**
  *
  * @author David
  */
-
+@Local
 public interface ICantanteRepo extends ICrud<Cantante, Integer>{
 
     

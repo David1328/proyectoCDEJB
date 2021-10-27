@@ -28,7 +28,9 @@ import javax.validation.constraints.*;
 @Table(name = "cantante",schema = "usuarios")
 
 @NamedQueries({
-    @NamedQuery(name = "cantante.listartodos",query = "select c from Cantante c")
+    @NamedQuery(name = "cantante.listartodos",query = "select c from Cantante c"),
+    @NamedQuery(name = "cantante.eliminarCantante",query = "Delete FROM Cantante c Where c.idCantante =:idCantante"),
+    @NamedQuery(name = "cantante.listarPorId",query = "select c FROM Cantante c Where c.idCantante =:idCantante")
 })
 public class Cantante implements Serializable{
     /*

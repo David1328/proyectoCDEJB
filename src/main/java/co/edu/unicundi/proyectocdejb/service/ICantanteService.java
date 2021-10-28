@@ -20,6 +20,7 @@ public interface ICantanteService {
     public void elminarCantanteId(int idCantante);
     public List<Cantante> listarCantantes();
     public Cantante listarCantantePorId(int idCantante);
-    public void actualizarCantane(Cantante cantanteAActualizar);
+    public void actualizarCantante(Cantante cantanteAActualizar);
+    
     
 }

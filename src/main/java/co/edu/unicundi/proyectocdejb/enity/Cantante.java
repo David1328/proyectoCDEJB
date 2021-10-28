@@ -25,14 +25,16 @@ import javax.validation.constraints.*;
  */
 @Entity
 
-@Table(name = "cantante",schema = "usuarios")
+@Table(name = "cantante", schema = "usuarios")
 
 @NamedQueries({
-    @NamedQuery(name = "cantante.listartodos",query = "select c from Cantante c"),
+    @NamedQuery(name = "cantante.listartodos", query = "select c from Cantante c"),
     @NamedQuery(name = "cantante.eliminarCantante",query = "Delete FROM Cantante c Where c.idCantante =:idCantante"),
-    @NamedQuery(name = "cantante.listarPorId",query = "select c FROM Cantante c Where c.idCantante =:idCantante")
+    @NamedQuery(name = "cantante.listarPorId", query = "select c FROM Cantante c Where c.idCantante =:idCantante"),
+    @NamedQuery(name = "cantante.actualizar", query = "update Cantante set nombre = :nombre,categoria = :categoria WHERE idCantante = :idCantante")
 })
-public class Cantante implements Serializable{
+public class Cantante implements Serializable {
+
     /*
     @NotNull(message = "Error con el id, no puede ser nulo")
     @Size(min = 1, max = 3, message = "Ingrese valores de entre 1 y 3 caracteres")*/
@@ -41,20 +43,16 @@ public class Cantante implements Serializable{
     @Id
     @Column(name = "id_cantante")
     private Integer idCantante;
-    
+
     @NotNull(message = "Es necesario ingresar un nombre")
     @Size(min = 3, max = 12, message = "Ingrese valores de entre 3 y 12 caracteres")
-    @Column(name =  "nombre",nullable = false)
+    @Column(name = "nombre", nullable = false)
     private String nombre;
-    
+
     @NotNull(message = "Es necesario ingresar una categoria")
     @Size(min = 3, max = 12, message = "Ingrese valores de entre 3 y 15 caracteres")
-    @Column(name = "categoria",nullable = false)
+    @Column(name = "categoria", nullable = false)
     private String categoria;
-    
-    
-
-    
 
     /**
      * @return the nombre
@@ -97,21 +95,18 @@ public class Cantante implements Serializable{
     public void setIdCantante(Integer idCantante) {
         this.idCantante = idCantante;
     }
-    
-    
-    
-        /**
+
+    /**
      * Metodo que envia la intancia para validar si tiene alguna violación
      *
      * @return
      *
-     * */
+     *
+     */
     public Set<ConstraintViolation<Cantante>> validar() {
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         Validator validator = factory.getValidator();
         return validator.validate(this);
     }
-    
-    
-    
+
 }

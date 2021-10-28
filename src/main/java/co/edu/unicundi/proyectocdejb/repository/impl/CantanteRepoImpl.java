@@ -18,23 +18,21 @@ import javax.persistence.TypedQuery;
  * @author David
  */
 @Stateless
-public class CantanteRepoImpl implements ICantanteRepo{
-    
-    
+public class CantanteRepoImpl implements ICantanteRepo {
+
     @PersistenceContext(unitName = "co.edu.unicundi_proyectoCDEJB_ejb_1.0-SNAPSHOTPU")
     private EntityManager conexion;
-    
+
     @Override
     public List<Cantante> listar() {
-        //devuelve un typeqry
-        TypedQuery<Cantante> info =  conexion.createNamedQuery("cantante.listartodos",Cantante.class);
+        TypedQuery<Cantante> info = conexion.createNamedQuery("cantante.listartodos", Cantante.class);
         List<Cantante> listaCantante = info.getResultList();
         return listaCantante;
     }
 
     @Override
     public Cantante listarId(Integer id) {
-        return this.conexion.createNamedQuery("cantante.listarPorId",Cantante.class).setParameter("idCantante", id).getResultList().get(0);
+        return this.conexion.createNamedQuery("cantante.listarPorId", Cantante.class).setParameter("idCantante", id).getResultList().get(0);
     }
 
     @Override
@@ -44,14 +42,17 @@ public class CantanteRepoImpl implements ICantanteRepo{
 
     @Override
     public void actualizar(Cantante actualizar) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        conexion.createNamedQuery("cantante.actualizar", Cantante.class)
+                .setParameter("nombre", actualizar.getNombre())
+                .setParameter("categoria", actualizar.getCategoria())
+                .setParameter("idCantante", actualizar.getIdCantante()).executeUpdate();
     }
 
     @Override
     public void eliminar(Integer eliminar) {
         this.conexion.createNamedQuery("cantante.eliminarCantante", Cantante.class).setParameter("idCantante", eliminar)
                 .executeUpdate();
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }

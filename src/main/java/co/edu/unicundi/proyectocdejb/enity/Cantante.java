@@ -35,9 +35,6 @@ import javax.validation.constraints.*;
 })
 public class Cantante implements Serializable {
 
-    /*
-    @NotNull(message = "Error con el id, no puede ser nulo")
-    @Size(min = 1, max = 3, message = "Ingrese valores de entre 1 y 3 caracteres")*/
     @Max(value = 999, message = "no puede ingresar valores mayores a 999")
     @Min(value = 1, message = "no puede ingresar valores minimos a 1")
     @Id

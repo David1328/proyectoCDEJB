@@ -35,23 +35,25 @@ public class ExceptionHandler implements ExceptionMapper<Exception> {
         ex.printStackTrace();
         ExcepionWrraper wrraper;
 
+        System.out.println("exexpcion: " + ex);
+
         String[] error;
 
         if (ex instanceof NullPointerException | ex instanceof NumberFormatException | ex instanceof NotFoundException) {//pagina no encontrada
             wrraper = new ExcepionWrraper(String.valueOf(Response.Status.NOT_FOUND.getStatusCode()), Response.Status.NOT_FOUND.getReasonPhrase(), ex.getMessage(),
-                    this.urlInfo.getPath());
+                    this.urlInfo.getPath());//404
             return Response.status(Response.Status.NOT_FOUND).entity(wrraper).build();
         } else if (ex instanceof NotAllowedException) {//se envia post y debe ser otro
             wrraper = new ExcepionWrraper(String.valueOf(Response.Status.METHOD_NOT_ALLOWED.getStatusCode()), Response.Status.METHOD_NOT_ALLOWED.getReasonPhrase(),
                     "Metodo no reconocido", this.urlInfo.getPath());
             return Response.status(Response.Status.METHOD_NOT_ALLOWED).entity(wrraper).build();
-        } else if (ex instanceof WebApplicationException) {//400 json mal formado
-            wrraper = new ExcepionWrraper(String.valueOf(Response.Status.BAD_REQUEST.getStatusCode()), Response.Status.BAD_REQUEST.getReasonPhrase(),
-                    "Json Mal formado", this.urlInfo.getPath());
-            return Response.status(Response.Status.BAD_REQUEST).entity(wrraper).build();
         } else if (ex instanceof IllegalArgumentException) {//400 bad req
             wrraper = new ExcepionWrraper(String.valueOf(Response.Status.BAD_REQUEST.getStatusCode()), Response.Status.BAD_REQUEST.getReasonPhrase(), ex.getMessage(),
                     this.urlInfo.getPath());
+            return Response.status(Response.Status.BAD_REQUEST).entity(wrraper).build();
+        } else if (ex instanceof WebApplicationException) {//400 json mal formado
+            wrraper = new ExcepionWrraper(String.valueOf(Response.Status.BAD_REQUEST.getStatusCode()), Response.Status.BAD_REQUEST.getReasonPhrase(),
+                    "Json Mal formado", this.urlInfo.getPath());
             return Response.status(Response.Status.BAD_REQUEST).entity(wrraper).build();
         } else if (ex instanceof NumberFormatException) {//excepcion textos
             wrraper = new ExcepionWrraper(String.valueOf(Response.Status.NOT_FOUND.getStatusCode()), Response.Status.NOT_FOUND.getReasonPhrase(), ex.getMessage(),

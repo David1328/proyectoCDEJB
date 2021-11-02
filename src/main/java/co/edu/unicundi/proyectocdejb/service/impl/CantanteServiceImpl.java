@@ -5,7 +5,9 @@
  */
 package co.edu.unicundi.proyectocdejb.service.impl;
 
+import co.edu.unicundi.proyectocdejb.enity.AlbumCantante;
 import co.edu.unicundi.proyectocdejb.enity.Cantante;
+import co.edu.unicundi.proyectocdejb.repository.IAlbumCantante;
 import co.edu.unicundi.proyectocdejb.repository.ICantanteRepo;
 import co.edu.unicundi.proyectocdejb.service.ICantanteService;
 import java.util.HashMap;
@@ -25,6 +27,8 @@ public class CantanteServiceImpl implements ICantanteService {
 
     @EJB
     private ICantanteRepo repo;
+    private IAlbumCantante repoalb;
+    
 
     @Override
     public void agregar(Cantante nuevo) {
@@ -111,5 +115,11 @@ public class CantanteServiceImpl implements ICantanteService {
             throw e;
         }
     }
+
+    @Override
+    public List<AlbumCantante> listarAlbumCantantes() {
+        return this.repo.listarAlbumCantantes();
+    }
+
 
 }

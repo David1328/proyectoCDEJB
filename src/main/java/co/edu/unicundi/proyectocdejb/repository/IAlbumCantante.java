@@ -6,8 +6,6 @@
 package co.edu.unicundi.proyectocdejb.repository;
 
 import co.edu.unicundi.proyectocdejb.enity.AlbumCantante;
-import co.edu.unicundi.proyectocdejb.enity.Cantante;
-import java.util.List;
 import javax.ejb.Local;
 
 /**
@@ -15,7 +13,7 @@ import javax.ejb.Local;
  * @author David
  */
 @Local
-public interface ICantanteRepo extends ICrud<Cantante, Integer>{
+public interface IAlbumCantante extends ICrud<AlbumCantante, Integer>{
 
-    public List<AlbumCantante> listarAlbumCantantes();
+    
 }

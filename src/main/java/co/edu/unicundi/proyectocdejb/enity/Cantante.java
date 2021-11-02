@@ -25,7 +25,7 @@ import javax.validation.constraints.*;
  */
 @Entity
 
-@Table(name = "cantante", schema = "usuarios")
+@Table(name = "cantante", schema = "disquera")
 
 @NamedQueries({
     @NamedQuery(name = "cantante.listartodos", query = "select c from Cantante c"),
@@ -41,7 +41,7 @@ public class Cantante implements Serializable {
     @Max(value = 999, message = "no puede ingresar valores mayores a 999")
     @Min(value = 1, message = "no puede ingresar valores minimos a 1")
     @Id
-    @Column(name = "id_cantante")
+    @Column(name = "id_cantante", nullable = true)
     private Integer idCantante;
 
     @NotNull(message = "Es necesario ingresar un nombre")
@@ -53,7 +53,22 @@ public class Cantante implements Serializable {
     @Size(min = 3, max = 12, message = "Ingrese valores de entre 3 y 15 caracteres")
     @Column(name = "categoria", nullable = false)
     private String categoria;
+    
+    @NotNull(message = "Es necesario ingresar el nombre artistico")
+    @Size(min = 3, max = 12, message = "Ingrese valores de entre 3 y 15 caracteres")
+    @Column(name = "nick_name", nullable = false)
+    private String nick_name;
 
+    public Cantante() {
+    }
+
+    public Cantante(Integer idCantante, String nombre, String categoria, String nick_name) {
+        this.idCantante = idCantante;
+        this.nombre = nombre;
+        this.categoria = categoria;
+        this.nick_name = nick_name;
+    }
+    
     /**
      * @return the nombre
      */
@@ -96,6 +111,7 @@ public class Cantante implements Serializable {
         this.idCantante = idCantante;
     }
 
+    
     /**
      * Metodo que envia la intancia para validar si tiene alguna violación
      *
@@ -107,6 +123,20 @@ public class Cantante implements Serializable {
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         Validator validator = factory.getValidator();
         return validator.validate(this);
+    }
+
+    /**
+     * @return the nick_name
+     */
+    public String getNick_name() {
+        return nick_name;
+    }
+
+    /**
+     * @param nick_name the nick_name to set
+     */
+    public void setNick_name(String nick_name) {
+        this.nick_name = nick_name;
     }
 
 }

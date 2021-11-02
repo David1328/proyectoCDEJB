@@ -1,8 +1,11 @@
 co\edu\unicundi\proyectocdejb\enity\Disco.class
 co\edu\unicundi\proyectocdejb\enity\FormartoAlbum.class
+co\edu\unicundi\proyectocdejb\enity\AlbumCantante.class
 co\edu\unicundi\proyectocdejb\enity\Cantante.class
 co\edu\unicundi\proyectocdejb\enity\FormartoAlbum_.class
+co\edu\unicundi\proyectocdejb\enity\AlbumCantante_.class
 co\edu\unicundi\proyectocdejb\repository\impl\DiscoRepoImpl.class
+co\edu\unicundi\proyectocdejb\repository\IAlbumCantante.class
 co\edu\unicundi\proyectocdejb\repository\impl\CantanteRepoImpl.class
 co\edu\unicundi\proyectocdejb\exception\ExcepionWrraper.class
 co\edu\unicundi\proyectocdejb\repository\ICrud.class

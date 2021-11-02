@@ -5,6 +5,7 @@
  */
 package co.edu.unicundi.proyectocdejb.service;
 
+import co.edu.unicundi.proyectocdejb.enity.AlbumCantante;
 import co.edu.unicundi.proyectocdejb.enity.Cantante;
 import java.util.List;
 import javax.ejb.Local;
@@ -21,6 +22,6 @@ public interface ICantanteService {
     public List<Cantante> listarCantantes();
     public Cantante listarCantantePorId(int idCantante);
     public void actualizarCantante(Cantante cantanteAActualizar);
-    
+    public List<AlbumCantante> listarAlbumCantantes();
     
 }

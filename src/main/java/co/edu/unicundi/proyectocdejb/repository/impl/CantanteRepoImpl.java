@@ -5,6 +5,7 @@
  */
 package co.edu.unicundi.proyectocdejb.repository.impl;
 
+import co.edu.unicundi.proyectocdejb.enity.AlbumCantante;
 import co.edu.unicundi.proyectocdejb.enity.Cantante;
 import co.edu.unicundi.proyectocdejb.repository.ICantanteRepo;
 import java.util.List;
@@ -55,6 +56,13 @@ public class CantanteRepoImpl implements ICantanteRepo {
         this.conexion.createNamedQuery("cantante.eliminarCantante", Cantante.class).setParameter("idCantante", eliminar)
                 .executeUpdate();
 //        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    @Override
+    public List<AlbumCantante> listarAlbumCantantes() {
+        TypedQuery<AlbumCantante> info = conexion.createNamedQuery("album_cantante.listartodos", AlbumCantante.class);
+        List<AlbumCantante> listaAlbumCantante = info.getResultList();
+        return listaAlbumCantante;
     }
 
 }

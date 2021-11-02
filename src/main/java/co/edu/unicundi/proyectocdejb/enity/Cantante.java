@@ -6,12 +6,16 @@
 package co.edu.unicundi.proyectocdejb.enity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
@@ -31,7 +35,7 @@ import javax.validation.constraints.*;
     @NamedQuery(name = "cantante.listartodos", query = "select c from Cantante c"),
     @NamedQuery(name = "cantante.eliminarCantante",query = "Delete FROM Cantante c Where c.idCantante =:idCantante"),
     @NamedQuery(name = "cantante.listarPorId", query = "select c FROM Cantante c Where c.idCantante =:idCantante"),
-    @NamedQuery(name = "cantante.actualizar", query = "update Cantante set nombre = :nombre,categoria = :categoria WHERE idCantante = :idCantante")
+    @NamedQuery(name = "cantante.actualizar", query = "update Cantante set nombre = :nombre,categoria = :categoria,nick_name = :nick_name WHERE idCantante = :idCantante")
 })
 public class Cantante implements Serializable {
 
@@ -58,7 +62,10 @@ public class Cantante implements Serializable {
     @Size(min = 3, max = 12, message = "Ingrese valores de entre 3 y 15 caracteres")
     @Column(name = "nick_name", nullable = false)
     private String nick_name;
-
+    
+    /*@OneToMany(mappedBy = "cantante", cascade = CascadeType.ALL)
+    private List<Disco> discos = new ArrayList<>();*/
+    
     public Cantante() {
     }
 

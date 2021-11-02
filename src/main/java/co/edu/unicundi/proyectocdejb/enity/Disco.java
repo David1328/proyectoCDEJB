@@ -19,6 +19,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import org.codehaus.jackson.annotate.JsonIgnore;
 
 /**
  *
@@ -70,18 +71,18 @@ public class Disco implements Serializable{
     @Column(name = "cant_discos", nullable = false)
     private Integer cantidad;
     
-    @NotNull(message = "Es necesario ingresar el formato del album")
+    /*@NotNull(message = "Es necesario ingresar el formato del album")
     @Size(min = 3, max = 12, message = "Ingrese valores de entre 3 y 12 caracteres")
     @Column(name = "id_artista_principal", nullable = false)
-    private Integer id_artista_principal;
+    private Integer id_artista_principal;*/
     
     @Column(name = "nick_artistas_secundarios", nullable = true)
     private String nick_artistas_secundarios;
     
-    
-    /*@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_artista_principal")
-    private Cantante cantante;*/
+    @JsonIgnore
+    @ManyToOne//(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_artista_principal", nullable = false)
+    private Cantante cantante;
     
     public Disco() {
     }
@@ -94,7 +95,6 @@ public class Disco implements Serializable{
         this.ano_lanzamiento = ano_lanzamiento;
         this.id_formato = id_formato;
         this.cantidad = cantidad;
-        this.id_artista_principal = id_artista_principal;
         this.nick_artistas_secundarios = nick_artistas_secundarios;
     }
 
@@ -199,19 +199,6 @@ public class Disco implements Serializable{
         this.cantidad = cantidad;
     }
 
-    /**
-     * @return the id_artista_principal
-     */
-    public Integer getId_artista_principal() {
-        return id_artista_principal;
-    }
-
-    /**
-     * @param id_artista_principal the id_artista_principal to set
-     */
-    public void setId_artista_principal(Integer id_artista_principal) {
-        this.id_artista_principal = id_artista_principal;
-    }
 
     /**
      * @return the nick_artistas_secundarios
@@ -225,6 +212,20 @@ public class Disco implements Serializable{
      */
     public void setNick_artistas_secundarios(String nick_artistas_secundarios) {
         this.nick_artistas_secundarios = nick_artistas_secundarios;
+    }
+
+    /**
+     * @return the cantante
+     */
+    public Cantante getCantante() {
+        return cantante;
+    }
+
+    /**
+     * @param cantante the cantante to set
+     */
+    public void setCantante(Cantante cantante) {
+        this.cantante = cantante;
     }
 
     

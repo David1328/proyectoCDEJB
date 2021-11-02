@@ -12,6 +12,7 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -63,8 +64,8 @@ public class Cantante implements Serializable {
     @Column(name = "nick_name", nullable = false)
     private String nick_name;
     
-    /*@OneToMany(mappedBy = "cantante", cascade = CascadeType.ALL)
-    private List<Disco> discos = new ArrayList<>();*/
+    @OneToMany(mappedBy = "cantante", fetch = FetchType.LAZY,cascade = CascadeType.ALL,orphanRemoval = true)
+    private List<Disco> discos = new ArrayList<>();
     
     public Cantante() {
     }
@@ -146,4 +147,21 @@ public class Cantante implements Serializable {
         this.nick_name = nick_name;
     }
 
+    /**
+     * @return the discos
+     */
+    public List<Disco> getDiscos() {
+        return discos;
+    }
+
+    /**
+     * @param discos the discos to set
+     */
+    public void setDiscos(List<Disco> discos) {
+        this.discos = discos;
+    }
+
+    
+    
+    
 }

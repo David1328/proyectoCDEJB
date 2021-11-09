@@ -35,10 +35,8 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 public class Disco implements Serializable{
    
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_disco", nullable = true)
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @NotNull(message = "Es necesario ingresar un nombre")
-    @Size(min = 3, max = 12, message = "Ingrese valores de entre 3 y 12 caracteres")
     private Integer id_disco;
     
     @NotNull(message = "Es necesario ingresar un album")
@@ -71,11 +69,6 @@ public class Disco implements Serializable{
     @Column(name = "cant_discos", nullable = false)
     private Integer cantidad;
     
-    /*@NotNull(message = "Es necesario ingresar el formato del album")
-    @Size(min = 3, max = 12, message = "Ingrese valores de entre 3 y 12 caracteres")
-    @Column(name = "id_artista_principal", nullable = false)
-    private Integer id_artista_principal;*/
-    
     @Column(name = "nick_artistas_secundarios", nullable = true)
     private String nick_artistas_secundarios;
     
@@ -83,11 +76,11 @@ public class Disco implements Serializable{
     @JoinColumn(name = "id_artista_principal", nullable = false)
     private Cantante cantante;
     
+     
     public Disco() {
     }
 
-    public Disco(Integer id_disco, String nombre_album, String compania_productora, String formato, String ano_lanzamiento, Integer id_formato, Integer cantidad, Integer id_artista_principal, String nick_artistas_secundarios, Cantante cantante) {
-        this.id_disco = id_disco;
+    public Disco(String nombre_album, String compania_productora, String formato, String ano_lanzamiento, Integer id_formato, Integer cantidad, Integer id_artista_principal, String nick_artistas_secundarios, Cantante cantante) {
         this.nombre_album = nombre_album;
         this.compania_productora = compania_productora;
         this.formato = formato;

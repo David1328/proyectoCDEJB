@@ -6,7 +6,7 @@
 package co.edu.unicundi.proyectocdejb.service.impl;
 
 import co.edu.unicundi.proyectocdejb.enity.Disco;
-import co.edu.unicundi.proyectocdejb.repository.ICantanteRepo;
+import co.edu.unicundi.proyectocdejb.repository.IDiscoRepo;
 import co.edu.unicundi.proyectocdejb.service.IDiscoService;
 import java.util.List;
 import javax.ejb.EJB;
@@ -20,16 +20,18 @@ import javax.ejb.Stateless;
 public class DiscoServiceImpl implements IDiscoService{
 
     @EJB
-    private IDiscoService repo;
+    private IDiscoRepo repo;
     
     @Override
     public List<Disco> listarDiscos() {
-        return this.repo.listarDiscos();
+        return this.repo.listar();
+        //return null;
     }
 
     @Override
     public void agregarDisco(Disco discoNuevo) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("entro a el service");
+        this.repo.agregar(discoNuevo);
     }
 
     @Override

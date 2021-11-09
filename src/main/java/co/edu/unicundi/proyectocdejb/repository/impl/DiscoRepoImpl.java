@@ -38,7 +38,8 @@ public class DiscoRepoImpl implements IDiscoRepo{
 
     @Override
     public void agregar(Disco nuevo) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("Entro a la implementadion");
+        this.conexion.persist(nuevo);
     }
 
     @Override

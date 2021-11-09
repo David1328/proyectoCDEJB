@@ -8,13 +8,10 @@ package co.edu.unicundi.proyectocdejb.service.impl;
 import co.edu.unicundi.proyectocdejb.enity.AlbumCantante;
 import co.edu.unicundi.proyectocdejb.enity.Cantante;
 import co.edu.unicundi.proyectocdejb.exception.RecursoNoEncontrado;
-import co.edu.unicundi.proyectocdejb.repository.IAlbumCantante;
 import co.edu.unicundi.proyectocdejb.repository.ICantanteRepo;
 import co.edu.unicundi.proyectocdejb.service.ICantanteService;
 import java.util.HashMap;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.validation.ConstraintViolation;
@@ -28,7 +25,6 @@ public class CantanteServiceImpl implements ICantanteService {
 
     @EJB
     private ICantanteRepo repo;
-    private IAlbumCantante repoalb;
     
 
     @Override

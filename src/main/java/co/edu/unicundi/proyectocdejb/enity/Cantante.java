@@ -13,6 +13,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -35,7 +37,7 @@ import javax.validation.constraints.*;
 @NamedQueries({
     @NamedQuery(name = "cantante.listartodos", query = "select c from Cantante c"),
     @NamedQuery(name = "cantante.eliminarCantante",query = "Delete FROM Cantante c Where c.idCantante =:idCantante"),
-    @NamedQuery(name = "cantante.listarPorId", query = "select c FROM Cantante c Where c.idCantante =:idCantante"),
+    @NamedQuery(name = "cantante.nick_name", query = "select c FROM Cantante c Where c.nick_name =:nick_name"),
     @NamedQuery(name = "cantante.actualizar", query = "update Cantante set nombre = :nombre,categoria = :categoria,nick_name = :nick_name WHERE idCantante = :idCantante")
 })
 public class Cantante implements Serializable {
@@ -43,10 +45,9 @@ public class Cantante implements Serializable {
     /*
     @NotNull(message = "Error con el id, no puede ser nulo")
     @Size(min = 1, max = 3, message = "Ingrese valores de entre 1 y 3 caracteres")*/
-    @Max(value = 999, message = "no puede ingresar valores mayores a 999")
-    @Min(value = 1, message = "no puede ingresar valores minimos a 1")
     @Id
-    @Column(name = "id_cantante", nullable = true)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_cantante")
     private Integer idCantante;
 
     @NotNull(message = "Es necesario ingresar un nombre")
@@ -61,7 +62,7 @@ public class Cantante implements Serializable {
     
     @NotNull(message = "Es necesario ingresar el nombre artistico")
     @Size(min = 3, max = 12, message = "Ingrese valores de entre 3 y 15 caracteres")
-    @Column(name = "nick_name", nullable = false)
+    @Column(name = "nick_name", nullable = false, unique = true)
     private String nick_name;
     
     @OneToMany(mappedBy = "cantante", fetch = FetchType.LAZY,cascade = CascadeType.ALL,orphanRemoval = true)
@@ -70,8 +71,7 @@ public class Cantante implements Serializable {
     public Cantante() {
     }
 
-    public Cantante(Integer idCantante, String nombre, String categoria, String nick_name) {
-        this.idCantante = idCantante;
+    public Cantante(String nombre, String categoria, String nick_name) {
         this.nombre = nombre;
         this.categoria = categoria;
         this.nick_name = nick_name;

@@ -27,13 +27,12 @@ public class CantanteRepoImpl implements ICantanteRepo {
     @Override
     public List<Cantante> listar() {
         TypedQuery<Cantante> info = conexion.createNamedQuery("cantante.listartodos", Cantante.class);
-        List<Cantante> listaCantante = info.getResultList();
-        return listaCantante;
+        return info.getResultList();
     }
 
     @Override
     public Cantante listarId(Integer id) {
-        return this.conexion.createNamedQuery("cantante.listarPorId", Cantante.class).setParameter("idCantante", id).getResultList().get(0);
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
@@ -55,7 +54,7 @@ public class CantanteRepoImpl implements ICantanteRepo {
     public void eliminar(Integer eliminar) {
         this.conexion.createNamedQuery("cantante.eliminarCantante", Cantante.class).setParameter("idCantante", eliminar)
                 .executeUpdate();
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
     
     @Override
@@ -64,5 +63,21 @@ public class CantanteRepoImpl implements ICantanteRepo {
         List<AlbumCantante> listaAlbumCantante = info.getResultList();
         return listaAlbumCantante;
     }
+
+    @Override
+    public int buscarCantateNick_name(String nombre) {
+        return this.conexion.createNamedQuery("cantante.nick_name", Cantante.class)
+                .setParameter("nick_name", nombre).getResultList().size();
+    }
+
+    @Override
+    public Cantante filtrarPorNick_name(String nick_name) {
+        int cantidad = this.conexion.createNamedQuery("cantante.nick_name", Cantante.class)
+                .setParameter("nick_name", nick_name).getResultList().size();
+        return cantidad==0?null:this.conexion.createNamedQuery("cantante.nick_name", Cantante.class)
+                .setParameter("nick_name", nick_name).getResultList().get(0);
+    }
+
+    
 
 }

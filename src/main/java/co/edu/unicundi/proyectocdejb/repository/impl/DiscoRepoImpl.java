@@ -5,21 +5,30 @@
  */
 package co.edu.unicundi.proyectocdejb.repository.impl;
 
+import co.edu.unicundi.proyectocdejb.enity.Cantante;
 import co.edu.unicundi.proyectocdejb.enity.Disco;
 import co.edu.unicundi.proyectocdejb.repository.IDiscoRepo;
 import java.util.List;
+import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 /**
  *
  * @author David
  */
+@Stateless
 public class DiscoRepoImpl implements IDiscoRepo{
     
-    
+    @PersistenceContext(unitName = "co.edu.unicundi_proyectoCDEJB_ejb_1.0-SNAPSHOTPU")
+    private EntityManager conexion;
 
     @Override
     public List<Disco> listar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        TypedQuery<Disco> info = conexion.createNamedQuery("disco.listartodos", Disco.class);
+        List<Disco> listaCantante = info.getResultList();
+        return listaCantante;
     }
 
     @Override

@@ -61,7 +61,7 @@ public class ExceptionHandler implements ExceptionMapper<Exception> {
             wrraper = new ExcepionWrraper(String.valueOf(Response.Status.NOT_FOUND.getStatusCode()), Response.Status.NOT_FOUND.getReasonPhrase(), ex.getMessage(),
                     this.urlInfo.getPath());
             return Response.status(Response.Status.NOT_FOUND).entity(wrraper).build();
-        } else if (ex instanceof RuntimeException) {
+        } else if (ex instanceof RecursoNoEncontrado) {
             wrraper = new ExcepionWrraper(String.valueOf(Response.Status.CONFLICT.getStatusCode()), Response.Status.CONFLICT.getReasonPhrase(), ex.getMessage(),
                     this.urlInfo.getPath());
             return Response.status(Response.Status.CONFLICT).entity(wrraper).build();

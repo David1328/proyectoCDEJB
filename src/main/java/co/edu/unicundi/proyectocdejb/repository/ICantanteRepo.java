@@ -17,5 +17,7 @@ import javax.ejb.Local;
 @Local
 public interface ICantanteRepo extends ICrud<Cantante, Integer>{
 
+    public Cantante filtrarPorNick_name(String nick_name);
+    public int buscarCantateNick_name(String nombre);
     public List<AlbumCantante> listarAlbumCantantes();
 }

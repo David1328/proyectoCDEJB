@@ -79,7 +79,6 @@ public class Disco implements Serializable{
     @Column(name = "nick_artistas_secundarios", nullable = true)
     private String nick_artistas_secundarios;
     
-    @JsonIgnore
     @ManyToOne//(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_artista_principal", nullable = false)
     private Cantante cantante;
@@ -217,6 +216,7 @@ public class Disco implements Serializable{
     /**
      * @return the cantante
      */
+    @JsonIgnore
     public Cantante getCantante() {
         return cantante;
     }

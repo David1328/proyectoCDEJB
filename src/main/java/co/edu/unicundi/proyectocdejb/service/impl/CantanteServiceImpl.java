@@ -7,15 +7,16 @@ package co.edu.unicundi.proyectocdejb.service.impl;
 
 import co.edu.unicundi.proyectocdejb.enity.AlbumCantante;
 import co.edu.unicundi.proyectocdejb.enity.Cantante;
+import co.edu.unicundi.proyectocdejb.exception.RecursoNoEncontrado;
 import co.edu.unicundi.proyectocdejb.repository.IAlbumCantante;
 import co.edu.unicundi.proyectocdejb.repository.ICantanteRepo;
 import co.edu.unicundi.proyectocdejb.service.ICantanteService;
 import java.util.HashMap;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.validation.ConstraintViolation;
 
 /**
@@ -31,33 +32,27 @@ public class CantanteServiceImpl implements ICantanteService {
     
 
     @Override
-    public void agregar(Cantante nuevo) {
-        try {
-            HashMap<String, String> errores = new HashMap();
-            List<Cantante> listCantantes = this.listarCantantes();
+    public void agregar(Cantante nuevo) throws RecursoNoEncontrado{
+        HashMap<String, String> errores = new HashMap();
 
-            for (ConstraintViolation error : nuevo.validar()) {
-                errores.put(error.getPropertyPath().toString(), error.getMessage());
-            }
-
-            if (errores.size() > 0) {
-                throw new IllegalArgumentException(errores.toString());//400
+        for (ConstraintViolation error : nuevo.validar()) {
+            errores.put(error.getPropertyPath().toString(), error.getMessage());
+        }
+        if (errores.size() > 0) {
+            throw new IllegalArgumentException(errores.toString());//400
+        } else {
+            if ((this.repo.buscarCantateNick_name(nuevo.getNick_name().toLowerCase()) > 0)) {
+                System.out.println("Ya existe");
+                throw new RecursoNoEncontrado("Ya existe este cantante");//409 conflict
             } else {
-                for (Cantante LC : listCantantes) {
-                    if (LC.getIdCantante().equals(nuevo.getIdCantante())) {
-                        throw new RuntimeException("Ya existe este id");//409 conflict
-                    }
-                }
+                nuevo.setNick_name(nuevo.getNick_name().toLowerCase());
                 this.repo.agregar(nuevo);
             }
-        } catch (Exception e) {
-            throw e;
         }
     }
 
     @Override
     public List<Cantante> listarCantantes() {
-
         try {
             return this.repo.listar();
         } catch (Exception e) {
@@ -66,14 +61,17 @@ public class CantanteServiceImpl implements ICantanteService {
     }
 
     @Override
-    public void elminarCantanteId(int idCantante) {
+    public void elminarCantanteId(int idCantante) throws RecursoNoEncontrado {
         try {
 
             if (idCantante < 0) {
                 throw new IllegalArgumentException("no puede ingresar valores negativos");//400
             }
-
-            this.repo.eliminar(idCantante);
+            if(this.repo.listarId(idCantante) != null){
+             this.repo.eliminar(idCantante);   
+            }else{
+                throw new RecursoNoEncontrado("No existe el cantante");//409 conflict
+            }
 
         } catch (Exception e) {
             throw e;
@@ -93,7 +91,11 @@ public class CantanteServiceImpl implements ICantanteService {
             if (errores.size() > 0) {
                 throw new IllegalArgumentException(errores.toString());//400
             } else {
-                this.repo.actualizar(cntnt);
+                if(this.repo.buscarCantateNick_name(cntnt.getNick_name()) == 0){
+                    this.repo.actualizar(cntnt);
+                }else{
+                    throw new RuntimeException("Ya existe este cantante");//409 conflict
+                }
             }
         } catch (Exception e) {
             throw e;
@@ -101,16 +103,13 @@ public class CantanteServiceImpl implements ICantanteService {
     }
 
     @Override
-    public Cantante listarCantantePorId(int idCantante) {
+    public Cantante listarCantantePorId(String nick_name) {
         try {
-            List<Cantante> listCantantes = this.listarCantantes();
 
-            for (Cantante LC : listCantantes) {
-                if (LC.getIdCantante().equals(idCantante)) {
-                    return this.repo.listarId(idCantante);
-                }
+            if(this.repo.filtrarPorNick_name(nick_name) != null){
+                return this.repo.filtrarPorNick_name(nick_name);
             }
-            throw new NullPointerException("No existe este identificador");//404 not found
+            throw new NullPointerException("No existe este Cantante");//404 not found
         } catch (NullPointerException e) {
             throw e;
         }

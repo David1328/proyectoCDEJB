@@ -43,10 +43,10 @@ public class CantanteRepoImpl implements ICantanteRepo {
     @Override
     public void actualizar(Cantante actualizar) {
         System.out.println("actualizar"+actualizar.getNick_name());
-        conexion.createNamedQuery("cantante.actualizar", Cantante.class)
+        /*conexion.createNamedQuery("cantante.actualizar", Cantante.class)
                 .setParameter("categoria", actualizar.getCategoria())
                 .setParameter("idCantante", actualizar.getIdCantante()) 
-                .setParameter("nick_name", actualizar.getNick_name()).executeUpdate();
+                .setParameter("nick_name", actualizar.getNick_name()).executeUpdate();*/
     }
 
     @Override

@@ -8,7 +8,6 @@ package co.edu.unicundi.proyectocdejb.enity;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -59,10 +58,10 @@ public class Disco implements Serializable{
     @Column(name = "ano_lanzamiento", nullable = false)
     private String ano_lanzamiento;
     
-    @NotNull(message = "Es necesario ingresar el artista principal")
+    /*@NotNull(message = "Es necesario ingresar el artista principal")
     @Size(min = 3, max = 12, message = "Ingrese valores de entre 3 y 12 caracteres")
     @Column(name = "id_artista_principal", nullable = false)
-    private Integer id_artista_principal;
+    private Integer id_artista_principal;*/
     
     @NotNull(message = "Es necesario ingresar la cantidad de dicos")
     @Size(min = 3, max = 12, message = "Ingrese valores de entre 3 y 12 caracteres")
@@ -74,17 +73,19 @@ public class Disco implements Serializable{
     @Column(name = "precio", nullable = false)
     private Integer precio;
     
+    @ManyToOne//(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_artista_principal", nullable = false)
+    private Cantante cantante;
      
     public Disco() {
     }
 
-    public Disco(Integer id_disco, String nombre_disco, String compania_productora, String formato, String ano_lanzamiento, Integer id_artista_principal, Integer cantidad_discos, Integer precio) {
+    public Disco(Integer id_disco, String nombre_disco, String compania_productora, String formato, String ano_lanzamiento, Integer cantidad_discos, Integer precio) {
         this.id_disco = id_disco;
         this.nombre_disco = nombre_disco;
         this.compania_productora = compania_productora;
         this.formato = formato;
         this.ano_lanzamiento = ano_lanzamiento;
-        this.id_artista_principal = id_artista_principal;
         this.cantidad_discos = cantidad_discos;
         this.precio = precio;
     }
@@ -158,20 +159,7 @@ public class Disco implements Serializable{
     public void setAno_lanzamiento(String ano_lanzamiento) {
         this.ano_lanzamiento = ano_lanzamiento;
     }
-
-    /**
-     * @return the id_artista_principal
-     */
-    public Integer getId_artista_principal() {
-        return id_artista_principal;
-    }
-
-    /**
-     * @param id_artista_principal the id_artista_principal to set
-     */
-    public void setId_artista_principal(Integer id_artista_principal) {
-        this.id_artista_principal = id_artista_principal;
-    }
+    
 
     /**
      * @return the cantidad_discos
@@ -199,6 +187,21 @@ public class Disco implements Serializable{
      */
     public void setPrecio(Integer precio) {
         this.precio = precio;
+    }
+
+    /**
+     * @return the cantante
+     */
+    @JsonIgnore
+    public Cantante getCantante() {
+        return cantante;
+    }
+
+    /**
+     * @param cantante the cantante to set
+     */
+    public void setCantante(Cantante cantante) {
+        this.cantante = cantante;
     }
 
         

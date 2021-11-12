@@ -37,8 +37,8 @@ import javax.validation.constraints.*;
 @NamedQueries({
     @NamedQuery(name = "cantante.listartodos", query = "select c from Cantante c"),
     @NamedQuery(name = "cantante.eliminarCantante",query = "Delete FROM Cantante c Where c.idCantante =:idCantante"),
-    @NamedQuery(name = "cantante.nick_name", query = "select c FROM Cantante c Where c.nick_name =:nick_name"),
-    @NamedQuery(name = "cantante.actualizar", query = "update Cantante set nombre = :nombre,categoria = :categoria,nick_name = :nick_name WHERE idCantante = :idCantante")
+    @NamedQuery(name = "cantante.nick_name", query = "select c FROM Cantante c Where c.nick_name =:nick_name")//,
+    //@NamedQuery(name = "cantante.actualizar", query = "update Cantante set categoria = :categoria,nick_name = :nick_name WHERE idCantante = :idCantante")
 })
 public class Cantante implements Serializable {
 
@@ -49,11 +49,6 @@ public class Cantante implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_cantante")
     private Integer idCantante;
-
-    @NotNull(message = "Es necesario ingresar un nombre")
-    @Size(min = 3, max = 12, message = "Ingrese valores de entre 3 y 12 caracteres")
-    @Column(name = "nombre", nullable = false)
-    private String nombre;
 
     @NotNull(message = "Es necesario ingresar una categoria")
     @Size(min = 3, max = 12, message = "Ingrese valores de entre 3 y 15 caracteres")
@@ -71,25 +66,11 @@ public class Cantante implements Serializable {
     public Cantante() {
     }
 
-    public Cantante(String nombre, String categoria, String nick_name) {
-        this.nombre = nombre;
+    public Cantante(String categoria, String nick_name) {
         this.categoria = categoria;
         this.nick_name = nick_name;
     }
     
-    /**
-     * @return the nombre
-     */
-    public String getNombre() {
-        return nombre;
-    }
-
-    /**
-     * @param nombre the nombre to set
-     */
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
 
     /**
      * @return the categoria

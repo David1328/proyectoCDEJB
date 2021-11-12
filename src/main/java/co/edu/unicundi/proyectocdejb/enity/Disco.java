@@ -39,10 +39,10 @@ public class Disco implements Serializable{
     @Column(name = "id_disco", nullable = true)
     private Integer id_disco;
     
-    @NotNull(message = "Es necesario ingresar un album")
+    @NotNull(message = "Es necesario ingresar el nombre del disco")
     @Size(min = 3, max = 12, message = "Ingrese valores de entre 3 y 12 caracteres")
-    @Column(name = "nombre_album", nullable = false)
-    private String nombre_album;
+    @Column(name = "nombre_disco", nullable = false)
+    private String nombre_disco;
     
     @NotNull(message = "Es necesario ingresar una compañia productora")
     @Size(min = 3, max = 12, message = "Ingrese valores de entre 3 y 12 caracteres")
@@ -59,39 +59,36 @@ public class Disco implements Serializable{
     @Column(name = "ano_lanzamiento", nullable = false)
     private String ano_lanzamiento;
     
-    @NotNull(message = "Es necesario ingresar el formato del album")
+    @NotNull(message = "Es necesario ingresar el artista principal")
     @Size(min = 3, max = 12, message = "Ingrese valores de entre 3 y 12 caracteres")
-    @Column(name = "id_formato", nullable = false)
-    private Integer id_formato;
+    @Column(name = "id_artista_principal", nullable = false)
+    private Integer id_artista_principal;
     
     @NotNull(message = "Es necesario ingresar la cantidad de dicos")
     @Size(min = 3, max = 12, message = "Ingrese valores de entre 3 y 12 caracteres")
     @Column(name = "cant_discos", nullable = false)
-    private Integer cantidad;
+    private Integer cantidad_discos;
     
-    @Column(name = "nick_artistas_secundarios", nullable = true)
-    private String nick_artistas_secundarios;
-    
-    @ManyToOne//(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_artista_principal", nullable = false)
-    private Cantante cantante;
+    @NotNull(message = "Es necesario ingresar el precio")
+    @Size(min = 3, max = 12, message = "Ingrese valores de entre 3 y 12 caracteres")
+    @Column(name = "precio", nullable = false)
+    private Integer precio;
     
      
     public Disco() {
     }
 
-    public Disco(String nombre_album, String compania_productora, String formato, String ano_lanzamiento, Integer id_formato, Integer cantidad, Integer id_artista_principal, String nick_artistas_secundarios, Cantante cantante) {
-        this.nombre_album = nombre_album;
+    public Disco(Integer id_disco, String nombre_disco, String compania_productora, String formato, String ano_lanzamiento, Integer id_artista_principal, Integer cantidad_discos, Integer precio) {
+        this.id_disco = id_disco;
+        this.nombre_disco = nombre_disco;
         this.compania_productora = compania_productora;
         this.formato = formato;
         this.ano_lanzamiento = ano_lanzamiento;
-        this.id_formato = id_formato;
-        this.cantidad = cantidad;
-        this.nick_artistas_secundarios = nick_artistas_secundarios;
+        this.id_artista_principal = id_artista_principal;
+        this.cantidad_discos = cantidad_discos;
+        this.precio = precio;
     }
 
-    
-    
     /**
      * @return the id_disco
      */
@@ -107,60 +104,17 @@ public class Disco implements Serializable{
     }
 
     /**
-     * @return the nombre_album
+     * @return the nombre_disco
      */
-    public String getNombre_album() {
-        return nombre_album;
+    public String getNombre_disco() {
+        return nombre_disco;
     }
 
     /**
-     * @param nombre_album the nombre_album to set
+     * @param nombre_disco the nombre_disco to set
      */
-    public void setNombre_album(String nombre_album) {
-        this.nombre_album = nombre_album;
-    }
-
-
-    /**
-     * @return the formato
-     */
-    public String getFormato() {
-        return formato;
-    }
-
-    /**
-     * @param formato the formato to set
-     */
-    public void setFormato(String formato) {
-        this.formato = formato;
-    }
-
-    /**
-     * @return the id_formato
-     */
-    public Integer getId_formato() {
-        return id_formato;
-    }
-
-    /**
-     * @param id_formato the id_formato to set
-     */
-    public void setId_formato(Integer id_formato) {
-        this.id_formato = id_formato;
-    }
-
-    /**
-     * @return the ano_lanzamiento
-     */
-    public String getAno_lanzamiento() {
-        return ano_lanzamiento;
-    }
-
-    /**
-     * @param ano_lanzamiento the ano_lanzamiento to set
-     */
-    public void setAno_lanzamiento(String ano_lanzamiento) {
-        this.ano_lanzamiento = ano_lanzamiento;
+    public void setNombre_disco(String nombre_disco) {
+        this.nombre_disco = nombre_disco;
     }
 
     /**
@@ -178,49 +132,74 @@ public class Disco implements Serializable{
     }
 
     /**
-     * @return the cantidad
+     * @return the formato
      */
-    public Integer getCantidad() {
-        return cantidad;
+    public String getFormato() {
+        return formato;
     }
 
     /**
-     * @param cantidad the cantidad to set
+     * @param formato the formato to set
      */
-    public void setCantidad(Integer cantidad) {
-        this.cantidad = cantidad;
-    }
-
-
-    /**
-     * @return the nick_artistas_secundarios
-     */
-    public String getNick_artistas_secundarios() {
-        return nick_artistas_secundarios;
+    public void setFormato(String formato) {
+        this.formato = formato;
     }
 
     /**
-     * @param nick_artistas_secundarios the nick_artistas_secundarios to set
+     * @return the ano_lanzamiento
      */
-    public void setNick_artistas_secundarios(String nick_artistas_secundarios) {
-        this.nick_artistas_secundarios = nick_artistas_secundarios;
+    public String getAno_lanzamiento() {
+        return ano_lanzamiento;
     }
 
     /**
-     * @return the cantante
+     * @param ano_lanzamiento the ano_lanzamiento to set
      */
-    @JsonIgnore
-    public Cantante getCantante() {
-        return cantante;
+    public void setAno_lanzamiento(String ano_lanzamiento) {
+        this.ano_lanzamiento = ano_lanzamiento;
     }
 
     /**
-     * @param cantante the cantante to set
+     * @return the id_artista_principal
      */
-    public void setCantante(Cantante cantante) {
-        this.cantante = cantante;
+    public Integer getId_artista_principal() {
+        return id_artista_principal;
     }
 
-    
-    
+    /**
+     * @param id_artista_principal the id_artista_principal to set
+     */
+    public void setId_artista_principal(Integer id_artista_principal) {
+        this.id_artista_principal = id_artista_principal;
+    }
+
+    /**
+     * @return the cantidad_discos
+     */
+    public Integer getCantidad_discos() {
+        return cantidad_discos;
+    }
+
+    /**
+     * @param cantidad_discos the cantidad_discos to set
+     */
+    public void setCantidad_discos(Integer cantidad_discos) {
+        this.cantidad_discos = cantidad_discos;
+    }
+
+    /**
+     * @return the precio
+     */
+    public Integer getPrecio() {
+        return precio;
+    }
+
+    /**
+     * @param precio the precio to set
+     */
+    public void setPrecio(Integer precio) {
+        this.precio = precio;
+    }
+
+        
 }

@@ -5,10 +5,11 @@ import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
 @Generated(value="EclipseLink-2.7.7.v20200504-rNA", date="2021-11-15T21:25:18")
-@StaticMetamodel(FormartoAlbum.class)
-public class FormartoAlbum_ { 
+@StaticMetamodel(Admin.class)
+public class Admin_ { 
 
-    public static volatile SingularAttribute<FormartoAlbum, Integer> id_formato;
-    public static volatile SingularAttribute<FormartoAlbum, String> nombre_formato;
+    public static volatile SingularAttribute<Admin, String> usuario;
+    public static volatile SingularAttribute<Admin, String> contrasena;
+    public static volatile SingularAttribute<Admin, Integer> id;
 
 }

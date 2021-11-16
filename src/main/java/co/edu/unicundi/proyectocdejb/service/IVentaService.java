@@ -5,17 +5,15 @@
  */
 package co.edu.unicundi.proyectocdejb.service;
 
-import co.edu.unicundi.proyectocdejb.enity.Disco;
-import java.util.List;
+import co.edu.unicundi.proyectocdejb.enity.Venta;
+import co.edu.unicundi.proyectocdejb.exception.RecursoNoEncontrado;
 import javax.ejb.Local;
 
 /**
  *
- * @author David
+ * @author asantibo
  */
 @Local
-public interface IDiscoService {
-    public List<Disco> listarDiscos();
-    public void agregarDisco(Disco discoNuevo);
-    public void actualizarDisco(Disco discoAactualizar);
+public interface IVentaService{
+    public void agregar(Venta nuevo) throws RecursoNoEncontrado;
 }

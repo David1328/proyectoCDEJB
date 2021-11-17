@@ -57,12 +57,7 @@ public class Disco implements Serializable{
     @Size(min = 3, max = 12, message = "Ingrese valores de entre 3 y 12 caracteres")
     @Column(name = "ano_lanzamiento", nullable = false)
     private String ano_lanzamiento;
-    
-    /*@NotNull(message = "Es necesario ingresar el artista principal")
-    @Size(min = 3, max = 12, message = "Ingrese valores de entre 3 y 12 caracteres")
-    @Column(name = "id_artista_principal", nullable = false)
-    private Integer id_artista_principal;*/
-    
+
     @NotNull(message = "Es necesario ingresar la cantidad de dicos")
     @Size(min = 3, max = 12, message = "Ingrese valores de entre 3 y 12 caracteres")
     @Column(name = "cant_discos", nullable = false)

@@ -5,6 +5,7 @@
  */
 package co.edu.unicundi.proyectocdejb.enity;
 
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,6 +14,10 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -27,7 +32,10 @@ import javax.validation.constraints.Size;
 @Table(name = "admin", schema = "usuario")
 
 @NamedQueries({
-    @NamedQuery(name = "admin.listartodos", query = "select a from Admin a")
+    @NamedQuery(name = "admin.listartodos", query = "select a from Admin a"),
+    @NamedQuery(name = "admin.validarlogin", query = "select a from Admin a WHERE a.usuario = :usuario AND a.contrasena = :contrasena"),
+
+    
 })
 
 public class Admin {
@@ -99,6 +107,18 @@ public class Admin {
     }
     
     
+        /**
+     * Metodo que envia la intancia para validar si tiene alguna violación
+     *
+     * @return
+     *
+     *
+     */
+    public Set<ConstraintViolation<Admin>> validar() {
+        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+        Validator validator = factory.getValidator();
+        return validator.validate(this);
+    }
     
     
 }

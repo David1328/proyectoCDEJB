@@ -65,6 +65,10 @@ public class ExceptionHandler implements ExceptionMapper<Exception> {
             wrraper = new ExcepionWrraper(String.valueOf(Response.Status.CONFLICT.getStatusCode()), Response.Status.CONFLICT.getReasonPhrase(), ex.getMessage(),
                     this.urlInfo.getPath());
             return Response.status(Response.Status.CONFLICT).entity(wrraper).build();
+        } else if (ex instanceof ExceptionNoAutorizado) {
+            wrraper = new ExcepionWrraper(String.valueOf(Response.Status.UNAUTHORIZED.getStatusCode()), Response.Status.UNAUTHORIZED.getReasonPhrase(), ex.getMessage(),
+                    this.urlInfo.getPath());
+            return Response.status(Response.Status.UNAUTHORIZED).entity(wrraper).build();
         } else {
             wrraper = new ExcepionWrraper(String.valueOf(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode()), Response.Status.INTERNAL_SERVER_ERROR.getReasonPhrase(), "",
                     this.urlInfo.getPath());

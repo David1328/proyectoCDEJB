@@ -13,6 +13,7 @@ import co.edu.unicundi.proyectocdejb.repository.IAdminRepo;
 import co.edu.unicundi.proyectocdejb.service.IAdminService;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import java.util.Base64;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -41,6 +42,9 @@ public class AdminServiceImpl implements IAdminService {
             throw new IllegalArgumentException(errores.toString());//400
         } else {
             //cifrar contra
+            String contrasena = datosE.getContrasena();
+            datosE.setContrasena(Base64.getEncoder().encodeToString(contrasena.getBytes()));
+
             if ((this.repo.validarUsuarioContra(datosE)) > 0) {
                 String key = "qiq*nFdWbvd9Wd6F";
                 long tiempo = System.currentTimeMillis();

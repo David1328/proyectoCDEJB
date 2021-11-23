@@ -16,4 +16,5 @@ import javax.ejb.Local;
 @Local
 public interface IVentaService{
     public void agregar(Venta nuevo) throws RecursoNoEncontrado;
+    public Object agregarCarrito(Venta nuevo) throws RecursoNoEncontrado;
 }

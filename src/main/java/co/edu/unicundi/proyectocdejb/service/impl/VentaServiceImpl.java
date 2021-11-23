@@ -14,6 +14,7 @@ import java.util.HashMap;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.validation.ConstraintViolation;
+import javax.ws.rs.InternalServerErrorException;
 
 /**
  *
@@ -58,6 +59,40 @@ public class VentaServiceImpl implements IVentaService {
                 System.out.println("va a vender un disco");
             }
         }
+    }
+    
+    /**
+     *
+     * @param nuevo
+     * @return
+     * @throws RecursoNoEncontrado
+     */
+    @Override
+    public Object agregarCarrito(Venta nuevo) throws RecursoNoEncontrado {
+        Cancion cancion = new Cancion();
+        HashMap<String, String> errores = new HashMap();
+
+        for (ConstraintViolation error : nuevo.validar()) {
+            errores.put(error.getPropertyPath().toString(), error.getMessage());
+        }
+        if (errores.size() > 0) {
+            throw new IllegalArgumentException(errores.toString());//400
+        } else {
+            //cancion
+            if (nuevo.getTipo_venta() == 1) {
+                cancion=this.repo.buscarCancion(nuevo.getIdTipo_venta());
+                if (cancion != null) {
+                    Object cancionobj = new Object();
+                    cancionobj = cancion;
+                    return cancionobj;
+                } else {
+                    System.out.println("No existe esta cancion");
+                    throw new RecursoNoEncontrado("No existe esta cancion");//409 conflict
+                }
+                //disco
+            }
+        }
+        throw new InternalServerErrorException();//500
     }
 
 }

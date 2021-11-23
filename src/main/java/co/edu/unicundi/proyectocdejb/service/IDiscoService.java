@@ -16,6 +16,7 @@ import javax.ejb.Local;
 @Local
 public interface IDiscoService {
     public List<Disco> listarDiscos();
+    public List<Disco> listarPorId(int id_artista_principal);
     public void agregarDisco(Disco discoNuevo);
     public void actualizarDisco(Disco discoAactualizar);
 }

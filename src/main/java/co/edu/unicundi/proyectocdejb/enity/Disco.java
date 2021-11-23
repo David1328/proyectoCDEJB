@@ -13,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedNativeQuery;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -29,8 +30,10 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 @Table(name = "disco", schema = "disquera")
 
 @NamedQueries({
-    @NamedQuery(name = "disco.listartodos", query = "select d from Disco d")
+    @NamedQuery(name = "disco.listartodos", query = "select d from Disco d"),
+        
 })
+@NamedNativeQuery(name = "disco.listarporid", query = "SELECT * FROM disquera.disco Where id_artista_principal = ?",resultClass = Disco.class)
 public class Disco implements Serializable{
    
     @Id

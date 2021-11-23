@@ -51,5 +51,15 @@ public class DiscoRepoImpl implements IDiscoRepo{
     public void eliminar(Integer eliminar) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public List<Disco> listarDiscosPorCante(int id_artista_principal) {
+        TypedQuery<Disco> info = conexion.createNamedQuery("disco.listarporid", Disco.class)
+                .setParameter(1, id_artista_principal);
+        List<Disco> listaCantante = info.getResultList();
+        return listaCantante;
+    }
+
+   
     
 }

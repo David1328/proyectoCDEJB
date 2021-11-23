@@ -6,6 +6,7 @@
 package co.edu.unicundi.proyectocdejb.repository;
 
 import co.edu.unicundi.proyectocdejb.enity.Disco;
+import java.util.List;
 import javax.ejb.Local;
 
 /**
@@ -14,5 +15,7 @@ import javax.ejb.Local;
  */
 @Local
 public interface IDiscoRepo extends ICrud<Disco, Integer>{
+    
+    public List<Disco> listarDiscosPorCante(int id_artista_principal);
     
 }

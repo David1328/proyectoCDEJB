@@ -38,5 +38,15 @@ public class DiscoServiceImpl implements IDiscoService{
     public void actualizarDisco(Disco discoAactualizar) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public List<Disco> listarPorId(int id_artista) {
+        System.err.println("cantidad "+this.repo.listarDiscosPorCante(id_artista).size());
+        if(this.repo.listarDiscosPorCante(id_artista).isEmpty()){
+            throw new NullPointerException("No existe este Cantante");//404 not found
+        }else{
+            return this.repo.listarDiscosPorCante(id_artista);
+        }
+    }
     
 }

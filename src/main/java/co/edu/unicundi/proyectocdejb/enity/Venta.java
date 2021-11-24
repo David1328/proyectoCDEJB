@@ -12,9 +12,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedNativeQuery;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
@@ -37,7 +39,8 @@ import javax.validation.constraints.Size;
 @NamedQueries({
     @NamedQuery(name = "venta.listartodos", query = "select v from Venta v")
 })
-
+@NamedNativeQuery(name = "venta.cancionId", query = "SELECT * FROM disquera.cancion Where id = ?",resultClass = Cancion.class)
+//@NamedNativeQuery(name = "venta.cancionId", query = "SELECT * FROM disquera.cancion Where id = ?",resultClass = Venta.class)
 public class Venta implements Serializable{
     
     @Id
@@ -67,7 +70,17 @@ public class Venta implements Serializable{
     @NotNull(message = "Es necesario ingresar un id de la cancion o album vendido")
     @Column(name = "id_tipo_venta", nullable = false)
     private String idTipo_venta;    
-
+    
+    
+    @Transient
+    private String tipoDeProdcuto;
+    
+    @Transient
+    private String ventaProducto;
+    
+    @Transient
+    private int precioProducto;
+    
     public Venta() {
     }
 
@@ -79,9 +92,6 @@ public class Venta implements Serializable{
         this.tipo_venta = tipo_venta;
         this.idTipo_venta = idTipo_venta;
     }
-    
-    
-            
     
         /**
      * Metodo que envia la intancia para validar si tiene alguna violación
@@ -179,18 +189,48 @@ public class Venta implements Serializable{
     public void setIdTipo_venta(String idTipo_venta) {
         this.idTipo_venta = idTipo_venta;
     }
+
+    /**
+     * @return the tipoDeProdcuto
+     */
+    public String getTipoDeProdcuto() {
+        return tipoDeProdcuto;
+    }
+
+    /**
+     * @param tipoDeProdcuto the tipoDeProdcuto to set
+     */
+    public void setTipoDeProdcuto(String tipoDeProdcuto) {
+        this.tipoDeProdcuto = tipoDeProdcuto;
+    }
+
+    /**
+     * @return the ventaProducto
+     */
+    public String getVentaProducto() {
+        return ventaProducto;
+    }
+
+    /**
+     * @param ventaProducto the ventaProducto to set
+     */
+    public void setVentaProducto(String ventaProducto) {
+        this.ventaProducto = ventaProducto;
+    }
+
+    /**
+     * @return the precioProducto
+     */
+    public int getPrecioProducto() {
+        return precioProducto;
+    }
+
+    /**
+     * @param precioProducto the precioProducto to set
+     */
+    public void setPrecioProducto(int precioProducto) {
+        this.precioProducto = precioProducto;
+    }
+    
+    
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-

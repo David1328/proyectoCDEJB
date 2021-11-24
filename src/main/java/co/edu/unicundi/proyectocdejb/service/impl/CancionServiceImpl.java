@@ -86,4 +86,13 @@ public class CancionServiceImpl implements ICancionService {
             throw e;
         }
     }
+
+    @Override
+    public List<Cancion> listarCanciones() throws RecursoNoEncontrado {
+        if(this.repo.listar().isEmpty()){
+            throw new NullPointerException("No existe este Cantante");//404 not found
+        }else{
+            return this.repo.listar();
+        }
+    }
 }

@@ -93,6 +93,7 @@ public class CancionRepoImpl implements ICancionRepo {
 
     @Override
     public List<Cancion> listar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        TypedQuery<Cancion> info = conexion.createNamedQuery("cancion.listarCancion", Cancion.class);
+        return info.getResultList();
     }
 }

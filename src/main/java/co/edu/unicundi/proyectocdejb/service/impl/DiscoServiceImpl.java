@@ -40,8 +40,8 @@ public class DiscoServiceImpl implements IDiscoService{
     }
 
     @Override
-    public List<Disco> listarPorId(int id_artista) {
-        System.err.println("cantidad "+this.repo.listarDiscosPorCante(id_artista).size());
+    public List<Disco> listarPorId(String id_artista) {
+        System.out.println("cantidad "+this.repo.listarDiscosPorCante(id_artista).size());
         if(this.repo.listarDiscosPorCante(id_artista).isEmpty()){
             throw new NullPointerException("No existe este Cantante");//404 not found
         }else{

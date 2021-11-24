@@ -36,6 +36,7 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "cancion.listarcanciones_segunNombre", query = "select c from Cancion c Where c.nombre = :nombre"),
     @NamedQuery(name = "cancion.listarcanciones_segunArtista", query = "select c from Cancion c Where c.artista_productor = :artista_productor"),
     @NamedQuery(name = "cancion.listarCancionPorAlbum", query = "select c from Cancion c Where c.id_album = :id_album"),
+    @NamedQuery(name = "cancion.listarCancion", query = "select c from Cancion c"),
     //venta
     @NamedQuery(name = "cancion.infoCancion", query = "select c from Cancion c Where c.id = :id"),
     @NamedQuery(name = "cancion.actualizarCopias", query = "UPDATE Cancion c SET c.copias_fisicas = :copias_fisicas WHERE c.id = :id")

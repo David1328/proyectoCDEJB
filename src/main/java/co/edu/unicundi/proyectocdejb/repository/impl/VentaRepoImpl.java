@@ -68,7 +68,18 @@ public class VentaRepoImpl implements IVentaRepo {
     }
 
     @Override
-    public Object obtenerTarifa(int idTipoDeProducto, int idProducto) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Venta obtenerTarifa(int idTipoDeProducto, int idProducto) {
+        Venta tarifa = new Venta();
+        if(idTipoDeProducto==1){
+            Cancion tarifaC = new Cancion();
+            tarifaC = this.conexion.createNamedQuery("venta.cancionId", Cancion.class)
+                .setParameter(1, idProducto).getSingleResult();
+            tarifa.setIdTipo_venta("Cancion");
+            tarifa.setVentaProducto(tarifaC.getNombre());
+            tarifa.setPrecioProducto(tarifaC.getPrecio());
+            return tarifa;
+        }else{
+            return null;
+        }
     }
 }

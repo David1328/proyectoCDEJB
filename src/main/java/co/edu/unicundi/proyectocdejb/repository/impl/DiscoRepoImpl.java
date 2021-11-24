@@ -53,9 +53,11 @@ public class DiscoRepoImpl implements IDiscoRepo{
     }
 
     @Override
-    public List<Disco> listarDiscosPorCante(int id_artista_principal) {
+    public List<Disco> listarDiscosPorCante(String id_artista_principal) {
+        int idCantante = ((Cantante)conexion.createNamedQuery("cantante.nick_name", Cantante.class).
+                setParameter("nick_name", id_artista_principal).getSingleResult()).getIdCantante();
         TypedQuery<Disco> info = conexion.createNamedQuery("disco.listarporid", Disco.class)
-                .setParameter(1, id_artista_principal);
+                .setParameter(1, idCantante);
         List<Disco> listaCantante = info.getResultList();
         return listaCantante;
     }

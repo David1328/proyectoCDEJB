@@ -39,10 +39,10 @@ public class VentaServiceImpl implements IVentaService {
         } else {
             //cancion
             if (nuevo.getTipo_venta() == 1) {
-                cancion=this.repo.buscarCancion(nuevo.getIdTipo_venta());
+                cancion = this.repo.buscarCancion(nuevo.getIdTipo_venta());
                 if (cancion != null) {
                     if (cancion.getCopias_fisicas() > 0) {
-                        cancion.setCopias_fisicas(cancion.getCopias_fisicas()-1);
+                        cancion.setCopias_fisicas(cancion.getCopias_fisicas()-nuevo.getCantidad());
                         this.repo.venderActualizarCancion(cancion);
                         this.repo.agregar(nuevo);
                     }else{
@@ -62,8 +62,22 @@ public class VentaServiceImpl implements IVentaService {
     }
 
     @Override
-    public Object obtenerTarifa(int idTipoDeProducto, int idProducto) throws RecursoNoEncontrado {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Venta obtenerTarifa(int idTipoDeProducto, int idProducto) throws RecursoNoEncontrado {
+        Cancion cancion = new Cancion();
+        //cancion
+        if (idTipoDeProducto == 1) {
+            cancion = this.repo.buscarCancion(String.valueOf(idProducto));
+            if (cancion.getCopias_fisicas() > 0) {
+                return this.repo.obtenerTarifa(idTipoDeProducto, idProducto);
+            }else{
+                System.out.println("No existe disponibilidad");
+                throw new RecursoNoEncontrado("No existe disponibilidad");//409 conflict
+            }
+        //disco
+        } else{
+            System.out.println("va a vender un disco");
+            return null;
+        }
     }
     
     /**

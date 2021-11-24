@@ -18,5 +18,5 @@ public interface IVentaRepo extends ICrud<Venta, Integer>{
     public Cancion buscarCancion(String IdTipo_venta);
     public int buscarAlbum(String IdTipo_venta);
     public void venderActualizarCancion(Cancion cancion);
-    public Object obtenerTarifa(int idTipoDeProducto,int idProducto);
+    public Venta obtenerTarifa(int idTipoDeProducto,int idProducto);
 }

@@ -16,6 +16,6 @@ import javax.ejb.Local;
 @Local
 public interface IDiscoRepo extends ICrud<Disco, Integer>{
     
-    public List<Disco> listarDiscosPorCante(int id_artista_principal);
+    public List<Disco> listarDiscosPorCante(String id_artista_principal);
     
 }

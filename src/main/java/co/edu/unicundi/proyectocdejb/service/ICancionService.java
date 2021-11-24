@@ -17,6 +17,7 @@ import javax.ejb.Local;
 @Local
 public interface ICancionService {
     public void agregar(Cancion cancanteNuevo) throws RecursoNoEncontrado;
+    public List<Cancion> listarCanciones()throws RecursoNoEncontrado;
     public List<Cancion> listarCancionPorArtistaAutor(String artista_productor)throws RecursoNoEncontrado;
     public List<Cancion> listarCancionPorNombre(String nombre)throws RecursoNoEncontrado;
     public List<Cancion> listarCancionPorAlbum(int id_album)throws RecursoNoEncontrado;

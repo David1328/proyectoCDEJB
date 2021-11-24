@@ -59,10 +59,11 @@ public class AdminRepoImpl implements IAdminRepo {
     }
 
     @Override
-    public void agregarAuditoria(AuditoriaToken datosE) {
-        this.conexion.createNamedQuery("INSERT INTO auditoria.token (id,token,fecha) VALUES (:id, :token :fecha);")
-                .setParameter("id", datosE.getId())
-                .setParameter("token", datosE.getToken())
-                .setParameter("fecha", datosE.getFecha());
+    public void agregarAuditoria(Admin datosE) {
+        this.conexion.createNamedQuery("admin.actualizar_datostoken", Admin.class)
+                .setParameter("token_activo", datosE.getToken_activo())
+                .setParameter("fecha_actividad", datosE.getFecha_actividad())
+                .setParameter("usuario", datosE.getUsuario())
+                .setParameter("contrasena", datosE.getContrasena()).executeUpdate();
     }
 }

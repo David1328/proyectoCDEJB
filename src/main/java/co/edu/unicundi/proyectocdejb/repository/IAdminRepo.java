@@ -15,5 +15,5 @@ import co.edu.unicundi.proyectocdejb.enity.AuditoriaToken;
  */
 public interface IAdminRepo extends ICrud<AlbumCantante, Integer>{
     public int validarUsuarioContra(Admin datosE);
-    public void agregarAuditoria(AuditoriaToken auditoria);
+    public void agregarAuditoria(Admin auditoria);
 }

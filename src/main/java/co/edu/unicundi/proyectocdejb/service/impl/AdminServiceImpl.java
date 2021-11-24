@@ -13,6 +13,7 @@ import co.edu.unicundi.proyectocdejb.repository.IAdminRepo;
 import co.edu.unicundi.proyectocdejb.service.IAdminService;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import java.time.LocalDateTime;
 import java.util.Base64;
 import java.util.Date;
 import java.util.HashMap;
@@ -27,14 +28,14 @@ import javax.validation.ConstraintViolation;
  */
 @Stateless
 public class AdminServiceImpl implements IAdminService {
-
+    
     @EJB
     private IAdminRepo repo;
-
+    
     @Override
     public String login(Admin datosE) throws ExceptionNoAutorizado {
         HashMap<String, String> errores = new HashMap();
-
+        
         for (ConstraintViolation error : datosE.validar()) {
             errores.put(error.getPropertyPath().toString(), error.getMessage());
         }
@@ -44,11 +45,11 @@ public class AdminServiceImpl implements IAdminService {
             //cifrar contra
             String contrasena = datosE.getContrasena();
             datosE.setContrasena(Base64.getEncoder().encodeToString(contrasena.getBytes()));
-
+            
             if ((this.repo.validarUsuarioContra(datosE)) > 0) {
                 String key = "qiq*nFdWbvd9Wd6F";
                 long tiempo = System.currentTimeMillis();
-
+                
                 Map<String, Object> permisos = new HashMap();
                 permisos.put("1", "Admin");//clave valor de la base de datos
 
@@ -61,16 +62,16 @@ public class AdminServiceImpl implements IAdminService {
                         .compact();
                 TokenDto token = new TokenDto();
                 token.setToken(jwt);
-                AuditoriaToken auditoria = new AuditoriaToken();
-                auditoria.setToken(jwt);
-//                this.repo.agregarAuditoria(auditoria);
+                datosE.setToken_activo(jwt);
+                datosE.setFecha_actividad((LocalDateTime.now()).toString());
+                this.repo.agregarAuditoria(datosE);
                 return token.getToken();
             } else {
                 //401 No autorizado
                 throw new ExceptionNoAutorizado("Usuario u/o contrasena incorrecta");
             }
-
+            
         }
     }
-
+    
 }

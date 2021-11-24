@@ -66,4 +66,9 @@ public class VentaRepoImpl implements IVentaRepo {
     public void actualizar(Venta actualizar) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public Object obtenerTarifa(int idTipoDeProducto, int idProducto) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

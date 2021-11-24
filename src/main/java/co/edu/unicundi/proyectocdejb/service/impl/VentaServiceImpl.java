@@ -60,6 +60,11 @@ public class VentaServiceImpl implements IVentaService {
             }
         }
     }
+
+    @Override
+    public Object obtenerTarifa(int idTipoDeProducto, int idProducto) throws RecursoNoEncontrado {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
     /**
      *
@@ -67,7 +72,8 @@ public class VentaServiceImpl implements IVentaService {
      * @return
      * @throws RecursoNoEncontrado
      */
-    @Override
+    
+    /*
     public Object agregarCarrito(Venta nuevo) throws RecursoNoEncontrado {
         Cancion cancion = new Cancion();
         HashMap<String, String> errores = new HashMap();
@@ -94,5 +100,6 @@ public class VentaServiceImpl implements IVentaService {
         }
         throw new InternalServerErrorException();//500
     }
-
+*/
+    
 }

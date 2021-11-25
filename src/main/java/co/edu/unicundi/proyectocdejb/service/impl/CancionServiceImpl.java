@@ -35,7 +35,7 @@ public class CancionServiceImpl implements ICancionService {
         if (errores.size() > 0) {
             throw new IllegalArgumentException(errores.toString());//400
         } else {
-            if ((this.repo.buscarNombreCancion_Artista(nuevo.getNombre(), nuevo.getArtista_productor(), nuevo.getId_album()) > 0)) {
+            if ((this.repo.buscarNombreCancion_Artista(nuevo.getNombre().toLowerCase(), nuevo.getArtista_productor(), nuevo.getId_album()) > 0)) {
                 System.out.println("Ya existe esta cancion respecto al este cantante, en este album");
                 throw new RecursoNoEncontrado("este cantante ya tiene registrada esa cancion en este album");//409 conflict
             } else {

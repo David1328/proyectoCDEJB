@@ -5,7 +5,9 @@
  */
 package co.edu.unicundi.proyectocdejb.service.impl;
 
+import co.edu.unicundi.proyectocdejb.enity.Cantante;
 import co.edu.unicundi.proyectocdejb.enity.Disco;
+import co.edu.unicundi.proyectocdejb.exception.RecursoNoEncontrado;
 import co.edu.unicundi.proyectocdejb.repository.IDiscoRepo;
 import co.edu.unicundi.proyectocdejb.service.IDiscoService;
 import java.util.List;
@@ -29,9 +31,17 @@ public class DiscoServiceImpl implements IDiscoService{
     }
 
     @Override
-    public void agregarDisco(Disco discoNuevo) {
-        System.out.println("entro a el service");
-        this.repo.agregar(discoNuevo);
+    public void agregarDisco(Disco discoNuevo)throws RecursoNoEncontrado {
+        if(this.repo.existenciaDisco(discoNuevo.getNombre_disco()) != null){
+            Cantante nuevoDiscoIdCantante = new Cantante();
+            nuevoDiscoIdCantante.setIdCantante(discoNuevo.getId_artista_principal());
+            discoNuevo.setCantante(nuevoDiscoIdCantante);
+            System.out.println("entro a el service");
+            this.repo.agregar(discoNuevo);
+        }else{
+            throw new RecursoNoEncontrado("Ya existe este Disco");//409 conflict
+        }
+        
     }
 
     @Override

@@ -6,6 +6,7 @@
 package co.edu.unicundi.proyectocdejb.service;
 
 import co.edu.unicundi.proyectocdejb.enity.Disco;
+import co.edu.unicundi.proyectocdejb.exception.RecursoNoEncontrado;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -17,6 +18,6 @@ import javax.ejb.Local;
 public interface IDiscoService {
     public List<Disco> listarDiscos();
     public List<Disco> listarPorId(String id_artista_principal);
-    public void agregarDisco(Disco discoNuevo);
+    public void agregarDisco(Disco discoNuevo) throws RecursoNoEncontrado;
     public void actualizarDisco(Disco discoAactualizar);
 }

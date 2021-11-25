@@ -17,6 +17,7 @@ import javax.persistence.NamedNativeQuery;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import org.codehaus.jackson.annotate.JsonIgnore;
@@ -31,7 +32,7 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 
 @NamedQueries({
     @NamedQuery(name = "disco.listartodos", query = "select d from Disco d"),
-        
+    @NamedQuery(name = "disco.discoExistente", query = "select d from Disco d Where d.nombre_disco =:nombre_disco")
 })
 @NamedNativeQuery(name = "disco.listarporid", query = "SELECT * FROM disquera.disco Where id_artista_principal = ?",resultClass = Disco.class)
 public class Disco implements Serializable{
@@ -75,6 +76,9 @@ public class Disco implements Serializable{
     @JoinColumn(name = "id_artista_principal", nullable = false)
     private Cantante cantante;
      
+    @Transient
+    private Integer id_artista_principal;
+    
     public Disco() {
     }
 
@@ -202,5 +206,21 @@ public class Disco implements Serializable{
         this.cantante = cantante;
     }
 
+    /**
+     * @return the id_artista_principal
+     */
+    public Integer getId_artista_principal() {
+        return id_artista_principal;
+    }
+
+    /**
+     * @param id_artista_principal the id_artista_principal to set
+     */
+    public void setId_artista_principal(Integer id_artista_principal) {
+        this.id_artista_principal = id_artista_principal;
+    }
+
+    
+    
         
 }

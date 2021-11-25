@@ -39,7 +39,16 @@ public class DiscoRepoImpl implements IDiscoRepo{
     @Override
     public void agregar(Disco nuevo) {
         System.out.println("Entro a la implementadion");
-        this.conexion.persist(nuevo);
+        this.conexion.createNativeQuery("INSERT INTO disquera.disco (nombre_disco, compania_productora, formato, ano_lanzamiento, id_artista_principal, cant_discos, precio)"
+                + " VALUES (?,?,?,?,?,?,?)")
+                .setParameter(1, nuevo.getNombre_disco())
+                .setParameter(2, nuevo.getCompania_productora())
+                .setParameter(3, nuevo.getFormato())
+                .setParameter(4, nuevo.getAno_lanzamiento())
+                .setParameter(5, nuevo.getCantante().getIdCantante())
+                .setParameter(6, nuevo.getCantidad_discos())
+                .setParameter(7, nuevo.getPrecio())
+                .executeUpdate();
     }
 
     @Override
@@ -60,6 +69,14 @@ public class DiscoRepoImpl implements IDiscoRepo{
                 .setParameter(1, idCantante);
         List<Disco> listaCantante = info.getResultList();
         return listaCantante;
+    }
+
+    @Override
+    public Disco existenciaDisco(String nombre_disco) {
+        //nombre_disco
+        return this.conexion.createNamedQuery("disco.discoExistente", Disco.class)
+                .setParameter("nombre_disco", nombre_disco)
+                .getSingleResult();
     }
 
    
